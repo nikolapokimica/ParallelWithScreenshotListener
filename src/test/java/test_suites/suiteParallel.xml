@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Parallel Tests" parallel="methods" thread-count="3">
+<suite name="Parallel Tests" parallel="methods" thread-count="4">
     <test name="Tests">
         <classes>
             <class name="tests.FailedLoginTest">
