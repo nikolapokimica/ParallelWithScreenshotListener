@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Parallel Tests" parallel="methods" thread-count="5">
+<suite name="Parallel Tests" parallel="methods" thread-count="3">
     <test name="Tests">
         <classes>
             <class name="tests.FailedLoginTest">
@@ -10,7 +10,8 @@
             </class>
             <class name="tests_with_login.LogoutTest">
             </class>
-            <class name="tests_with_login.BuyOneItemFromHomePageTest"></class>
+            <class name="tests_with_login.BuyOneItemFromHomePageTest">
+            </class>
         </classes>
     </test>
 </suite>
