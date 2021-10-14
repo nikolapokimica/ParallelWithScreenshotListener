@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="TestNG driver suite"  >
+
+    <listeners>
+        <listener class-name="listeners.AnnotationTransformer" />
+        <listener class-name="listeners.ScreenshotListener" />
+    </listeners>
+
+    <!--Testovi su podeljeni u dva suite-a, zato sto su neki testovi zavisni od RegistrationTest.java. Prvo se izvrsi RegistrationTest, pa ostali paralelno-->
+    <suite-files>
+        <suite-file path="./src/test/java/test_suites/suiteRegistration.xml" />
+        <suite-file path="./src/test/java/test_suites/suiteParallel.xml" />
+    </suite-files>
+</suite>
+
+
+
+
