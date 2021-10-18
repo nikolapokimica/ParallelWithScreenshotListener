@@ -20,8 +20,8 @@ public class BuyOneItemFromHomePage extends BasePage {
         super(driver);
     }
 
-    public BuyOneItemFromHomePage navigateToHomePage() {
-        driver.get(PropertyManager.getInstance().getUrl());
+    public BuyOneItemFromHomePage navigateToHomePage(String url) {
+        driver.get(url);
         return this;
     }
 

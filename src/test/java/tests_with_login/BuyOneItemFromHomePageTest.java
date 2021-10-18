@@ -4,13 +4,14 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.BuyOneItemFromHomePage;
 import pages.VerifyPage;
+import utilities.PropertyManager;
 
 public class BuyOneItemFromHomePageTest extends BaseTestWithLogin {
 
     @Test
     public void buyStuff() {
         new BuyOneItemFromHomePage(driver)
-                .navigateToHomePage()
+                .navigateToHomePage(PropertyManager.getInstance().getUrl())
                 .selectArticleAndAddToCart();
 
         try {

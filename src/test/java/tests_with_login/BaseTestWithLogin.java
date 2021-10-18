@@ -1,5 +1,6 @@
 package tests_with_login;
 
+import cookie_saver.CookieSaver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.BeforeMethod;
@@ -23,10 +24,9 @@ public abstract class BaseTestWithLogin extends BaseTest {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.manage().window().maximize();
 
-        new LoginPage(driver)
-                .openHomePage(PropertyManager.getInstance().getUrl())
-                .login(PropertyManager.getInstance().getLoginEmail(),
-                        PropertyManager.getInstance().getLoginPassword());
+        LoginPage loginPage = new LoginPage(driver).openHomePage(PropertyManager.getInstance().getUrl());
+        driver.manage().addCookie(CookieSaver.getCookie(driver, loginPage));
+        driver.navigate().refresh();
 
         verifyPage = new VerifyPage(driver);
     }
