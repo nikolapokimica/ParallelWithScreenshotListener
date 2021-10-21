@@ -18,7 +18,7 @@ public class CookieSaver {
             loginPage.login(PropertyManager.getInstance().getLoginEmail(),
                     PropertyManager.getInstance().getLoginPassword());
             Set<Cookie> cookies = driver.manage().getCookies();
-            cookie = (Cookie) cookies.stream().toArray()[0];
+            cookie = (Cookie) cookies.toArray()[0];
         }
         return cookie;
     }
