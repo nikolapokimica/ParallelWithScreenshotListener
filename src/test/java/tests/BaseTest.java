@@ -15,12 +15,14 @@ public abstract class BaseTest {
     @BeforeMethod
     public void setup() {
 
+        //Obavesti Windows da cemo koristiti chrome driver
         System.setProperty("webdriver.chrome.driver", PropertyManager.getInstance().getDriverPath());
 
-        driver = new ChromeDriver(new ChromeOptions().addArguments("--disable-notifications"));
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
+        //inicijalizuj driver i prosledi mu podesavanje da iskljuci sva obavestenje da ne ometaju test i da se maksimizuje
+        driver = new ChromeDriver(new ChromeOptions().addArguments("--disable-notifications").addArguments("--start-maximized"));
 
+        //podesi driver da ceka 20s da se element pojavi pre nego sto baci izuzetak No Such Element Exception i fejluje test
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
 
     @AfterMethod

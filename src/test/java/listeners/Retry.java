@@ -3,6 +3,7 @@ package listeners;
 import org.testng.IRetryAnalyzer;
 import org.testng.ITestResult;
 
+//Implementaicjom IRetyAnalyzer definisimo uslove za ponovno pokretanje fail-ovanih testova
 public class Retry implements IRetryAnalyzer {
 
     private int count = 0;
@@ -10,6 +11,8 @@ public class Retry implements IRetryAnalyzer {
 
     @Override
     public boolean retry(ITestResult iTestResult) {
+
+        //Ako je test pao, obavesti listener da pokrene test ponovo dokle god je count<maxTry
         if (!iTestResult.isSuccess()) {
             if (count < maxTry) {
                 count++;

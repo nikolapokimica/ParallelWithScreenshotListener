@@ -10,10 +10,10 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void login() {
-        new LoginPage(driver)
-                .openHomePage(PropertyManager.getInstance().getUrl())
-                .login(PropertyManager.getInstance().getLoginEmail(),
-                        PropertyManager.getInstance().getLoginPassword());
+        LoginPage page = new LoginPage(driver);
+        page.openPage(PropertyManager.getInstance().getHomePageUrl());
+        page.login(PropertyManager.getInstance().getLoginEmail(),
+                PropertyManager.getInstance().getLoginPassword());
 
         try {
             new VerifyPage(driver).verifyLogin("Sign out");

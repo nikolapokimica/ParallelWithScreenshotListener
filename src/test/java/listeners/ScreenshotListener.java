@@ -13,16 +13,29 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 
+//Interfejs ITEstListener sadrzi vise metoda koje rukovode dogadjajima za testiranje.
+//Za nase potrebe dovoljno je samo odraditi @Override na onTestFailure() metodu sa kodom koji ce da uradi screenshot ekrana kada test padne.
 public class ScreenshotListener implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult result) {
+
+        //uzima instancu objekta koji je izazvao pad testa
         Object currentClass = result.getInstance();
+
+        //svaki objekat ima svoju instancu driver-a, pa se uzima driver za ovaj konkretan objekat
         WebDriver driver = ((BaseTest) currentClass).getDriver();
+
         if (driver != null) {
+
+            //definisemo jedinstveno ime screenshot-a sa vremenom kada je napravljen
             Calendar calendar = Calendar.getInstance();
             SimpleDateFormat formater = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
+
+            //uzima se screenshot
             File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+
+            //cuva se kao jpg format
             File destFile = new File("test-output\\errorScreenshots\\" + result.getName() + "_"
                     + formater.format(calendar.getTime()) + "-" + Arrays.toString(result.getParameters()) + ".jpg");
             try {
@@ -30,6 +43,8 @@ public class ScreenshotListener implements ITestListener {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            //dodaje se screenshot u testng report
             Reporter.log("<a href='" + destFile.getAbsolutePath() + "'> <img src='" + destFile.getAbsolutePath() + "' height='100' width='100'/> </a>");
 
         }

@@ -2,6 +2,7 @@ package data_generators;
 
 import com.github.javafaker.Faker;
 
+//Klasa za generisanje pojedinacnih random podataka. Prosiriti po potrebi novim metodama
 public class DataCreation {
 
     private DataCreation() {}

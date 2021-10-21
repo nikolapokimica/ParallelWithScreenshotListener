@@ -14,11 +14,6 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-    public LoginPage openHomePage(String url) {
-        driver.get(url);
-        return this;
-    }
-
     public LoginPage login(String email, String password) {
         click(signInButtonBy);
         writeText(emailFieldBy, email);

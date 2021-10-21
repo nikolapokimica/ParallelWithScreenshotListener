@@ -2,6 +2,8 @@ package data_generators;
 
 import java.util.HashMap;
 
+//Klasa za generisanje i cuvanje vise podataka odjednom.
+//U klasama naslednicama u konstruktoru definisati podatke koje su potrebni
 public abstract class DataGenerator {
 
     protected HashMap<String, String> map;

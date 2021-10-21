@@ -6,19 +6,25 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Properties;
 
+//Property Manager je implementiran kao singleton klasa. U svakom trenutku ce postajati samo jedna instanca.
 public class PropertyManager {
 
     private static PropertyManager instance = null;
     private static Properties properties = null;
-    private static String driverPath, url, firstName,
+    private static String driverPath, homePageUrl, loginPageUrl, firstName,
                           lastName, loginPassword, loginEmail;
 
 
     private PropertyManager() {}
 
     public static PropertyManager getInstance() {
+
+        //Ako ne postoji instanca, kreiraj PropertyManager. Ovo ce se desiti prvi put kada se pozove getInstance()
+        // i kada se pozove getInstance nakon setConfiguration()
         if (instance == null) {
             instance = new PropertyManager();
+
+            //cita configuration.properties i cuva u objekat properties kao mapu
             properties = new Properties();
             try {
                 FileInputStream fis = new FileInputStream("src/main/resources/configuration.properties");
@@ -30,23 +36,28 @@ public class PropertyManager {
                 e.printStackTrace();
             }
 
+            //cita entry-e iz properties
             driverPath = properties.getProperty("driverPath");
-            url = properties.getProperty("url");
+            homePageUrl = properties.getProperty("url");
             firstName = properties.getProperty("first_name");
             lastName = properties.getProperty("last_name");
             loginPassword = properties.getProperty("loginPassword");
             loginEmail = properties.getProperty("loginEmail");
+            loginPageUrl = properties.getProperty("login_url");
         }
 
         return instance;
     }
 
     //radi smanjenja broja pristupa configuration.properties upis novih podataka je podeljen u dve metode
+    //dodaje novi entry u properties, koji cemo kasnije ceo upisati u configuration.properties sa metodom setConfiguration()
     public PropertyManager readyConfiguration(String key, String value) {
         properties.setProperty(key, value);
         return this;
     }
 
+    //Zamenjuje citav sadrzaj configuration.properties sa celokupnim sadrzajem iz properties i setuje instance na null
+    //tako pri sledecem pozivu getInstance() pravi se novi objekat PropertyManager-a i dobijamo validne nove podatke
     public void setConfiguration() {
         try {
             PrintWriter pw = new PrintWriter("src/main/resources/configuration.properties");
@@ -65,8 +76,8 @@ public class PropertyManager {
         return driverPath;
     }
 
-    public String getUrl()  {
-        return url;
+    public String getHomePageUrl()  {
+        return homePageUrl;
     }
 
     public String getFirstName() {
@@ -84,4 +95,6 @@ public class PropertyManager {
     public String getLoginEmail() {
         return loginEmail;
     }
+
+    public String getLoginPageUrl() { return loginPageUrl; }
 }

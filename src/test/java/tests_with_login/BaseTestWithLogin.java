@@ -1,15 +1,11 @@
 package tests_with_login;
 
 import cookie_saver.CookieSaver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.BeforeMethod;
 import pages.LoginPage;
 import pages.VerifyPage;
 import tests.BaseTest;
 import utilities.PropertyManager;
-
-import java.util.concurrent.TimeUnit;
 
 public abstract class BaseTestWithLogin extends BaseTest {
 
@@ -18,14 +14,17 @@ public abstract class BaseTestWithLogin extends BaseTest {
     @Override
     @BeforeMethod
     public void setup() {
-        System.setProperty("webdriver.chrome.driver", PropertyManager.getInstance().getDriverPath());
+        super.setup();
 
-        driver = new ChromeDriver(new ChromeOptions().addArguments("--disable-notifications"));
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
+        LoginPage loginPage = new LoginPage(driver);
 
-        LoginPage loginPage = new LoginPage(driver).openHomePage(PropertyManager.getInstance().getUrl());
+        //Otvara se login stranica
+        loginPage.openPage(PropertyManager.getInstance().getLoginPageUrl());
+
+        //Preskace se Login UI umetanjem cookie-a
         driver.manage().addCookie(CookieSaver.getCookie(driver, loginPage));
+
+        //Stranica se refresuje da bi se logovali sa kukijem
         driver.navigate().refresh();
 
         verifyPage = new VerifyPage(driver);

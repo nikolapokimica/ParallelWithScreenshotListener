@@ -2,6 +2,7 @@ package tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.BasePage;
 import pages.RegistrationPage;
 import pages.VerifyPage;
 import data_generators.DataGeneratorForRegistration;
@@ -11,13 +12,13 @@ public class RegistrationTest extends BaseTest {
 
     @Test
     public void registration() {
-
         DataGeneratorForRegistration registrationData = new DataGeneratorForRegistration();
-        //System.out.println(registrationData);
-        new RegistrationPage(driver)
-                .openHomePage(PropertyManager.getInstance().getUrl())
-                .navigateToRegistrationPage(registrationData.getData().get("email"))
+
+        RegistrationPage page = new RegistrationPage(driver);
+        page.openPage(PropertyManager.getInstance().getHomePageUrl());
+        page.navigateToRegistrationPage(registrationData.getData().get("email"))
                 .register(registrationData.getData());
+
         try {
             new VerifyPage(driver).verifyLogin("Sign out");
 

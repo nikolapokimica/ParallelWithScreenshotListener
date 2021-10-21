@@ -28,10 +28,6 @@ public class RegistrationPage extends BasePage {
         super(driver);
     }
 
-    public RegistrationPage openHomePage(String url) {
-        driver.get(url);
-        return this;
-    }
     public RegistrationPage navigateToRegistrationPage(String regEmail) {
         click(signInButtonBy);
         writeText(emailInputFieldBy, regEmail);
@@ -46,6 +42,7 @@ public class RegistrationPage extends BasePage {
         writeText(passwordInputFieldBy, registrationData.get("password"));
         writeText(addressInputFieldBy, registrationData.get("address"));
 
+        //Iz dropdown opcija selektuje random drzavu, nikad ne selektuje prvu opciju "-"
         Select state = new Select(driver.findElement(stateDropDownBy));
         state.selectByIndex((int)(1 + Math.random()*(state.getOptions().size()-1-1)));
 

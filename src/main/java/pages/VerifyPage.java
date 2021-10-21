@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+//Klasa koja ce radi verifikaciju u testovima
 public class VerifyPage extends BasePage {
 
     private By errorNotificationBy = By.xpath("//div[@id='center_column']/div[1]"),

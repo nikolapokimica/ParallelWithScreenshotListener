@@ -14,30 +14,33 @@ public class BuyOneItemFromHomePage extends BasePage {
                 proceedToCheckoutButtonThirdBy = By.xpath("//*[@id=\"center_column\"]/form/p/button/span"),
                 proceedToCheckoutButtonForthBy = By.xpath("//*[@id=\"form\"]/p/button/span"),
                 payByBankWireButtonBY = By.xpath("//*[@id=\"HOOK_PAYMENT\"]/div[1]/div/p/a"),
-                confirmOrderButtonBy = By.xpath("//*[@id=\"cart_navigation\"]/button/span");
+                confirmOrderButtonBy = By.xpath("//*[@id=\"cart_navigation\"]/button/span"),
+                checkBoxBy =  By.id("cgv");
 
     public BuyOneItemFromHomePage(WebDriver driver) {
         super(driver);
     }
 
-    public BuyOneItemFromHomePage navigateToHomePage(String url) {
-        driver.get(url);
-        return this;
-    }
-
     public BuyOneItemFromHomePage selectArticleAndAddToCart() {
+
+        //Dugme za dodavanje item-a u cart nije vidljivo dok se ne predje misem preko tog elementa
         Actions action = new Actions(driver);
         WebElement element = driver.findElement(By.xpath("//*[@id=\"homefeatured\"]/li[1]/div/div[1]/div/a[1]/img"));
         action.moveToElement(element).perform();
+
         click(addToCartButtonBy);
         click(proceedToCheckOutButtonBy);
         click(proceedToCheckOutButtonSecondBy);
         click(proceedToCheckoutButtonThirdBy);
-        WebElement checkBoxElement = driver.findElement(By.id("cgv"));
+
+        //Proverava da li je checkbox Terms and conditions oznacen i ako nije cekira ga
+        WebElement checkBoxElement = driver.findElement(checkBoxBy);
         if (!checkBoxElement.isSelected()) checkBoxElement.click();
+
         click(proceedToCheckoutButtonForthBy);
         click(payByBankWireButtonBY);
         click(confirmOrderButtonBy);
+
         return this;
     }
 
