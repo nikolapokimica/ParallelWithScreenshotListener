@@ -33,7 +33,7 @@ public class FailedLoginTest extends BaseTest {
                         //namerno izazvano da test padne u prva dva poziva prosle]ivanjem parametara
                         //korisnika koji vec imaju napravljen profil. Treci poziv koristi random podatke
                         {"arnold.feeney@hotmail.com", "cf8ly1ukx"},
-                        {"carmel.vandervort@yahoo.com", "u7ao1upj6b"},
+                        /*{"carmel.vandervort@yahoo.com", "u7ao1upj6b"},*/
                         {DataCreation.email(), DataCreation.password()}
                 };
     }

@@ -2,7 +2,7 @@
 <suite name="Complete Tests">
     <listeners>
         <listener class-name="listeners.AnnotationTransformer" />
-        <listener class-name="listeners.ScreenshotListener" />
+        <listener class-name="listeners.TestListener" />
     </listeners>
     <test name="SequentialTests">
         <groups>

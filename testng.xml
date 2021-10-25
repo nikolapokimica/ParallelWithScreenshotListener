@@ -4,7 +4,7 @@
 
     <listeners>
         <listener class-name="listeners.AnnotationTransformer" />
-        <listener class-name="listeners.ScreenshotListener" />
+        <listener class-name="listeners.TestListener" />
     </listeners>
 
     <!--Testovi su podeljeni u dva suite-a, zato sto su neki testovi zavisni od RegistrationTest.java. Prvo se izvrsi RegistrationTest, pa ostali paralelno-->

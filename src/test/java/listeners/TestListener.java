@@ -15,7 +15,7 @@ import java.util.Calendar;
 
 //Interfejs ITEstListener sadrzi vise metoda koje rukovode dogadjajima za testiranje.
 //Za nase potrebe dovoljno je samo odraditi @Override na onTestFailure() metodu sa kodom koji ce da uradi screenshot ekrana kada test padne.
-public class ScreenshotListener implements ITestListener {
+public class TestListener implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult result) {
@@ -42,6 +42,11 @@ public class ScreenshotListener implements ITestListener {
                 FileUtils.copyFile(scrFile, destFile);
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+
+            //ako test pripada grupi InDevelopment, nakon fail-a setuje mu se statis na Skip
+            if (Arrays.asList(result.getMethod().getGroups()).contains("InDevelopment")) {
+                result.setStatus(ITestResult.SKIP);
             }
 
             //dodaje se screenshot u testng report
