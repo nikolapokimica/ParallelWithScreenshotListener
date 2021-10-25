@@ -51,7 +51,7 @@ public class PropertyManager {
 
     //radi smanjenja broja pristupa configuration.properties upis novih podataka je podeljen u dve metode
     //dodaje novi entry u properties, koji cemo kasnije ceo upisati u configuration.properties sa metodom setConfiguration()
-    public PropertyManager readyConfiguration(String key, String value) {
+    public synchronized PropertyManager readyConfiguration(String key, String value) {
         properties.setProperty(key, value);
         return this;
     }

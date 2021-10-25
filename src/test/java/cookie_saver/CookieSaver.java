@@ -15,7 +15,7 @@ public class CookieSaver {
 
     //Pri prvom pozivu ove klase uradice se Login putem UI-a i sacuvace cookie za tu sesiju
     //Svaki sledeci poziv ce preskociti UI logovanje i vratiti vec sacuvani cookie
-    public static Cookie getCookie(WebDriver driver, LoginPage loginPage) {
+    public synchronized static Cookie getCookie(WebDriver driver, LoginPage loginPage) {
         if (cookie == null) {
             loginPage.login(PropertyManager.getInstance().getLoginEmail(),
                     PropertyManager.getInstance().getLoginPassword());

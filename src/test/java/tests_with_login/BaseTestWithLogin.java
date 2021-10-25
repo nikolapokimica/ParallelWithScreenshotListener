@@ -12,7 +12,7 @@ public abstract class BaseTestWithLogin extends BaseTest {
     protected VerifyPage verifyPage;
 
     @Override
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void setup() {
         super.setup();
 

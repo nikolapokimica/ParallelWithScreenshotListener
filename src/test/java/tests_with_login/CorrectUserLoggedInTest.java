@@ -6,7 +6,7 @@ import utilities.PropertyManager;
 
 public class CorrectUserLoggedInTest extends BaseTestWithLogin {
 
-    @Test
+    @Test(groups= {"TestsWithLogin"})
     public void userLoggedIn() {
 
         try {

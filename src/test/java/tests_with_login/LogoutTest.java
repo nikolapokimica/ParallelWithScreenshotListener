@@ -6,7 +6,7 @@ import pages.UserAccountPage;
 
 public class LogoutTest extends BaseTestWithLogin {
 
-    @Test
+    @Test(groups= {"TestsWithLogin"})
     public void logout() {
         new UserAccountPage(driver).logout();
 

@@ -12,7 +12,7 @@ public abstract class BaseTest {
 
     protected WebDriver driver;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void setup() {
 
         //Obavesti Windows da cemo koristiti chrome driver
@@ -25,7 +25,7 @@ public abstract class BaseTest {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void teardown() {
         driver.quit();
     }

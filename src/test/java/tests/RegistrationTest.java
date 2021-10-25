@@ -10,7 +10,7 @@ import utilities.PropertyManager;
 
 public class RegistrationTest extends BaseTest {
 
-    @Test
+    @Test(groups = {"SequentialTest"})
     public void registration() {
         DataGeneratorForRegistration registrationData = new DataGeneratorForRegistration();
 

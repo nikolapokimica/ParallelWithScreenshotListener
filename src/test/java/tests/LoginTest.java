@@ -8,7 +8,7 @@ import utilities.PropertyManager;
 
 public class LoginTest extends BaseTest {
 
-    @Test
+    @Test(groups= {"TestsWithoutLogin"})
     public void login() {
         LoginPage page = new LoginPage(driver);
         page.openPage(PropertyManager.getInstance().getHomePageUrl());

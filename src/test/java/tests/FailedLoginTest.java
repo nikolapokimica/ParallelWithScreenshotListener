@@ -10,7 +10,7 @@ import utilities.PropertyManager;
 
 public class FailedLoginTest extends BaseTest {
 
-    @Test(dataProvider="SearchProvider")
+    @Test(dataProvider="SearchProvider", groups= {"TestsWithoutLogin"})
     public void failedLogin(String email, String password) {
         LoginPage page = new LoginPage(driver);
         page.openPage(PropertyManager.getInstance().getHomePageUrl());

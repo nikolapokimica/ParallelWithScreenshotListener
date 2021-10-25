@@ -7,7 +7,7 @@ import utilities.PropertyManager;
 
 public class BuyOneItemFromHomePageTest extends BaseTestWithLogin {
 
-    @Test
+    @Test(groups= {"TestsWithLogin"})
     public void buyStuff() {
         BuyOneItemFromHomePage page = new BuyOneItemFromHomePage(driver);
         page.openPage(PropertyManager.getInstance().getHomePageUrl());

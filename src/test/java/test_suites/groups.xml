@@ -1,0 +1,30 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Complete Tests">
+    <listeners>
+        <listener class-name="listeners.AnnotationTransformer" />
+        <listener class-name="listeners.ScreenshotListener" />
+    </listeners>
+    <test name="SequentialTests">
+        <groups>
+            <run>
+                <include name="SequentialTest"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="tests"/>
+            <package name="tests_with_login"/>
+        </packages>
+    </test>
+    <test name="ParallelTests"  parallel="methods" thread-count="5">
+        <groups>
+            <run>
+                <exclude name="SequentialTest"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="tests"/>
+            <package name="tests_with_login"/>
+        </packages>
+    </test>
+
+</suite>
