@@ -44,7 +44,7 @@ public class TestListener implements ITestListener {
                 e.printStackTrace();
             }
 
-            //ako test pripada grupi InDevelopment, nakon fail-a setuje mu se statis na Skip
+            //ako test pripada grupi InDevelopment, nakon fail-a setuje mu se status na Skip
             if (Arrays.asList(result.getMethod().getGroups()).contains("InDevelopment")) {
                 result.setStatus(ITestResult.SKIP);
             }

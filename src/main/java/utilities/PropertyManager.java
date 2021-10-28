@@ -22,36 +22,40 @@ public class PropertyManager {
         //Ako ne postoji instanca, kreiraj PropertyManager. Ovo ce se desiti prvi put kada se pozove getInstance()
         // i kada se pozove getInstance nakon setConfiguration()
         if (instance == null) {
-            instance = new PropertyManager();
 
-            //cita configuration.properties i cuva u objekat properties kao mapu
-            properties = new Properties();
-            try {
-                FileInputStream fis = new FileInputStream("src/main/resources/configuration.properties");
-                properties.load(fis);
-                fis.close();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+            //zbog paralelnog izvrsavanja testova moze se desiti da se napravi vise od jedne instance i synchonized to sprecava
+            synchronized (PropertyManager.class) {
+
+                instance = new PropertyManager();
+
+                //cita configuration.properties i cuva u objekat properties kao mapu
+                properties = new Properties();
+                try {
+                    FileInputStream fis = new FileInputStream("src/main/resources/configuration.properties");
+                    properties.load(fis);
+                    fis.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                //cita entry-e iz properties
+                driverPath = properties.getProperty("driverPath");
+                homePageUrl = properties.getProperty("url");
+                firstName = properties.getProperty("first_name");
+                lastName = properties.getProperty("last_name");
+                loginPassword = properties.getProperty("loginPassword");
+                loginEmail = properties.getProperty("loginEmail");
+                loginPageUrl = properties.getProperty("login_url");
             }
-
-            //cita entry-e iz properties
-            driverPath = properties.getProperty("driverPath");
-            homePageUrl = properties.getProperty("url");
-            firstName = properties.getProperty("first_name");
-            lastName = properties.getProperty("last_name");
-            loginPassword = properties.getProperty("loginPassword");
-            loginEmail = properties.getProperty("loginEmail");
-            loginPageUrl = properties.getProperty("login_url");
         }
-
         return instance;
     }
 
     //radi smanjenja broja pristupa configuration.properties upis novih podataka je podeljen u dve metode
     //dodaje novi entry u properties, koji cemo kasnije ceo upisati u configuration.properties sa metodom setConfiguration()
-    public synchronized PropertyManager readyConfiguration(String key, String value) {
+    public PropertyManager readyConfiguration(String key, String value) {
         properties.setProperty(key, value);
         return this;
     }
